@@ -1,0 +1,136 @@
+<script>
+
+let round = 0;
+let playerScore = 0;
+let computerScore = 0;
+
+function computerChoice ()
+{
+	let choice = ['rock', 'paper', 'scissors'];
+	let number = Math.floor(Math.random()* 3);
+
+	return choice[number]; //Random choice when called
+}
+
+function playAgain ()
+{
+  if (round === 6)
+  {
+    console.log ("Final Result:\n" + "Player Score: " + playerScore + "\n" +
+                 "Computer Score: " + computerScore);
+      if (playerScore > computerScore)
+      {
+        console.log("Player Wins!");
+        return;
+      }
+      else if (playerScore < computerScore)
+      {
+        console.log("Computer Wins!")
+        return;
+      }
+      else {
+        console.log("It's a tie!");
+        return;
+      }
+  }
+	let playAgain = confirm('Would you like to play again?');
+
+	if (playAgain)
+	{
+		let pChoice = prompt('Choose between "rock", "paper", or "scissors"');
+		playGame(pChoice, computerChoice());
+	}
+	else
+	{
+		console.log('You have ended the game');
+	}
+}
+
+function anounceRoundScore ()
+{
+    console.log("Round: " + round +"\n" +
+                "Player Score: " + playerScore + "\n" +
+                "Computer Score: " + computerScore);
+    round++;
+}
+
+function  playGame (playerSelect, computerSelect)
+{
+  anounceRoundScore();
+	switch (playerSelect.toLowerCase())
+	{
+		case 'rock':
+			if (computerSelect === 'rock')
+			{
+				console.log('You have tied!');
+				playAgain();
+				break;
+			}
+			else if (computerSelect === 'paper')
+			{
+				console.log('You lost! Rock loses against paper.');
+        computerScore++;
+				playAgain();
+				break;
+			}
+			else if (computerSelect === 'scissors')
+			{
+				console.log('You win! Rock wins against scissors.');
+        playerScore++;
+				playAgain();
+				break;
+			}
+		case 'paper':
+			if (computerSelect === 'rock')
+			{
+				console.log('You win! Paper beats rock.');
+        playerScore++;
+				playAgain();
+				break;
+			}
+			else if (computerSelect === 'paper')
+			{
+				console.log('You tied!');
+				playAgain();
+				break;
+			}
+			else if (computerSelect === 'scissors')
+			{
+				console.log('You lost! Paper loses against scissors.');
+        computerScore++;
+				playAgain();
+				break;
+			}
+		case 'scissors':
+			if (computerSelect === 'rock')
+			{
+				console.log('You lost! Scissors loses against rock.');
+        computerScore++;
+				playAgain();
+				break;
+			}
+			else if (computerSelect === 'paper')
+			{
+				console.log('You win! Scissors beat paper.');
+        playerScore++;
+				playAgain();
+				break;
+			}
+			else if (computerSelect === 'scissors')
+			{
+				console.log('You tied!');
+				playAgain();
+				break;
+			}
+		default:
+			console.log('You typed something weird');
+			playAgain();
+			break;
+	}
+}
+//----------------------------end of functions--------------------------------
+
+let playerChoice = prompt('Choose between "rock", "scissors", or "paper"');
+playGame (playerChoice, computerChoice());
+
+</script>
